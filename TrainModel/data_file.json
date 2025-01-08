@@ -1,0 +1,113 @@
+{
+  "intents": [
+    {
+      "tag": "greeting",
+      "patterns": [
+        "Hi",
+        "Hello",
+        "Hey",
+        "How are you",
+        "Good morning",
+        "Good evening"
+      ],
+      "responses": [
+        "Hello! How can I help you today?",
+        "Hi there! Nice to meet you.",
+        "Hey! What can I do for you?"
+      ]
+    },
+    {
+      "tag": "goodbye",
+      "patterns": [
+        "Bye",
+        "See you later",
+        "Goodbye",
+        "Take care"
+      ],
+      "responses": [
+        "Goodbye! Have a great day!",
+        "See you later! Take care!",
+        "Bye! Come back soon!"
+      ]
+    },
+    {
+      "tag": "thanks",
+      "patterns": [
+        "Thank you",
+        "Thanks",
+        "Thanks a lot",
+        "I appreciate it"
+      ],
+      "responses": [
+        "You're welcome!",
+        "No problem at all!",
+        "Happy to help!"
+      ]
+    },
+    {
+      "tag": "about",
+      "patterns": [
+        "What can you do",
+        "Who are you",
+        "What are your features",
+        "Tell me about yourself"
+      ],
+      "responses": [
+        "I'm a chatbot designed to help answer your questions!",
+        "I'm an AI assistant here to help you with your queries.",
+        "I can answer questions and help you with various topics!"
+      ]
+    },
+    {
+      "tag": "age",
+      "patterns": [
+        "how old are you?",
+        "Do you have age?",
+        "how old you are?"
+      ],
+      "responses": [
+        "I don't have age, but I'm always alive",
+        "I'm always alive"
+      ]
+    },
+    {
+      "tag": "help",
+      "patterns": [
+        "Can you help me?",
+        "I need assistance",
+        "What can you help me with?",
+        "Help me with something"
+      ],
+      "responses": [
+        "Of course! What do you need help with?",
+        "Sure! Tell me what you need assistance with.",
+        "I'd be happy to help. What do you need?"
+      ]
+    },
+    {
+      "tag": "weather",
+      "patterns": [
+        "What's the weather like?",
+        "Tell me the weather",
+        "Is it going to rain today?",
+        "How's the weather?"
+      ],
+      "responses": [
+        "I can't check the weather right now, but I can point you to a reliable source!",
+        "Weather updates are a bit out of my scope, but I recommend using a weather app."
+      ]
+    },
+    {
+      "tag": "jokes",
+      "patterns": [
+        "Tell me a joke",
+        "Make me laugh",
+        "Do you know any jokes?"
+      ],
+      "responses": [
+        "Why don’t scientists trust atoms? Because they make up everything!",
+        "Why did the scarecrow win an award? Because he was outstanding in his field!"
+      ]
+    }
+  ]
+}
