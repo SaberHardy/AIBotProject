@@ -1,32 +1,32 @@
+const messageForm = document.getElementById('messageForm');
+const messageInput = document.getElementById('messageInput');
+const messagesArea = document.getElementById('messagesArea');
+
+function createMessageElement(message, type) {
+    const messageDiv = document.createElement('div');
+    messageDiv.className = `message ${type}`;
+
+    const messageContent = document.createElement('div');
+    messageContent.className = 'message-content';
+    messageContent.textContent = message;
+
+    messageDiv.appendChild(messageContent);
+    return messageDiv;
+}
+
+function clearEmptyState() {
+    const emptyState = messagesArea.querySelector('.empty-state');
+    if (emptyState) {
+        emptyState.remove();
+    }
+}
+
+function scrollToBottom() {
+    messagesArea.scrollTop = messagesArea.scrollHeight;
+}
+
 document.addEventListener('DOMContentLoaded', () => {
-    const messageForm = document.getElementById('messageForm');
-    const messageInput = document.getElementById('messageInput');
-    const messagesArea = document.getElementById('messagesArea');
-
-    function createMessageElement(message, type) {
-        const messageDiv = document.createElement('div');
-        messageDiv.className = `message ${type}`;
-
-        const messageContent = document.createElement('div');
-        messageContent.className = 'message-content';
-        messageContent.textContent = message;
-
-        messageDiv.appendChild(messageContent);
-        return messageDiv;
-    }
-
-    function clearEmptyState() {
-        const emptyState = messagesArea.querySelector('.empty-state');
-        if (emptyState) {
-            emptyState.remove();
-        }
-    }
-
-    function scrollToBottom() {
-        messagesArea.scrollTop = messagesArea.scrollHeight;
-    }
-
-    messageForm.addEventListener('submit', (e) => {
+    function handleMessageSubmit(e) {
         e.preventDefault();
 
         const message = messageInput.value.trim();
@@ -44,5 +44,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         // Scroll to bottom
         scrollToBottom();
-    });
+    }
+
+    messageForm.addEventListener('submit', handleMessageSubmit);
 });
