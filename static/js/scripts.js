@@ -25,6 +25,16 @@ function scrollToBottom() {
     messagesArea.scrollTop = messagesArea.scrollHeight;
 }
 
+function addBotResponse(messageArea, bot_response) {
+    setTimeout(()=>{
+       const botMessage = createMessageElement(bot_response, "bot_response");
+       messageArea.appendChild(botMessage);
+
+       scrollToBottom(messageArea);
+
+    }, 1000);
+}
+
 document.addEventListener('DOMContentLoaded', () => {
     function handleMessageSubmit(e) {
         e.preventDefault();
@@ -44,6 +54,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
         // Scroll to bottom
         scrollToBottom();
+
+        addBotResponse(messagesArea, "This is a general response");
     }
 
     messageForm.addEventListener('submit', handleMessageSubmit);
