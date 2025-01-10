@@ -37,9 +37,9 @@
         </div>
     </div>
 
-    <form class="input-area" id="messageForm" method="post" action="{% url 'send_response_to_frontend' %}">
+    <form class="input-area" id="messageForm" method="post">
         {% csrf_token %}
-        <input class="input-message" type="text" id="messageInput" name="message-user-input"
+        <input class="input-message" type="text" id="messageInput" name="message_user_input"
                placeholder="Type your message here..." required>
 
         <button type="submit">
