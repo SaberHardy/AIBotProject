@@ -26,17 +26,21 @@ function scrollToBottom() {
 }
 
 function addBotResponse(messageArea, bot_response) {
-    setTimeout(()=>{
-       const botMessage = createMessageElement(bot_response, "bot_response");
-       messageArea.appendChild(botMessage);
+    setTimeout(() => {
+        const botMessage = createMessageElement(bot_response, "bot_response");
+        messageArea.appendChild(botMessage);
 
-       scrollToBottom(messageArea);
+        scrollToBottom(messageArea);
 
     }, 1000);
 }
 
 document.addEventListener('DOMContentLoaded', () => {
     function handleMessageSubmit(e) {
+        const message_content = document.querySelector('.input-message');
+        console.log("message_content: ", message_content)
+        let formData = new FormData();
+
         e.preventDefault();
 
         const message = messageInput.value.trim();
@@ -55,8 +59,35 @@ document.addEventListener('DOMContentLoaded', () => {
         // Scroll to bottom
         scrollToBottom();
 
-        addBotResponse(messagesArea, "This is a general response");
+        $.ajax({
+            url: "/send_response_to_frontend/",
+            type: "POST",
+            processData: false,
+            contentType: false,
+            data: formData,
+            headers: {
+                'X-CSRFToken': getCookie('csrftoken')
+            }
+        }).done(function (response) {
+            addBotResponse(messagesArea, response['message']);
+        });
+
     }
 
     messageForm.addEventListener('submit', handleMessageSubmit);
 });
+
+function getCookie(name) {
+    let cookieValue = null;
+    if (document.cookie && document.cookie !== '') {
+        const cookies = document.cookie.split(';');
+        for (let i = 0; i < cookies.length; i++) {
+            const cookie = cookies[i].trim();
+            if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                break;
+            }
+        }
+    }
+    return cookieValue;
+}

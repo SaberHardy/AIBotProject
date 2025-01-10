@@ -37,8 +37,11 @@
         </div>
     </div>
 
-    <form class="input-area" id="messageForm">
-        <input type="text" id="messageInput" placeholder="Type your message here..." required>
+    <form class="input-area" id="messageForm" method="post" action="{% url 'send_response_to_frontend' %}">
+        {% csrf_token %}
+        <input class="input-message" type="text" id="messageInput" name="message-user-input"
+               placeholder="Type your message here..." required>
+
         <button type="submit">
             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-send"
                  viewBox="0 0 16 16">
