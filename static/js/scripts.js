@@ -36,12 +36,11 @@ function addBotResponse(messageArea, bot_response) {
 }
 
 document.addEventListener('DOMContentLoaded', () => {
-    function handleMessageSubmit(e) {
-        const message_content = document.querySelector('.input-message');
-        console.log("message_content: ", message_content)
-        let formData = new FormData();
-
+    async function handleMessageSubmit(e) {
         e.preventDefault();
+
+        // const message_content = document.querySelector('.input-message');
+        const csrfToken = document.querySelector('[name=csrfmiddlewaretoken]').value;
 
         const message = messageInput.value.trim();
         if (!message) return;
@@ -49,29 +48,29 @@ document.addEventListener('DOMContentLoaded', () => {
         // Clear empty state if it exists
         clearEmptyState();
 
-        // Add user message
-        const userMessage = createMessageElement(message, 'user');
-        messagesArea.appendChild(userMessage);
-
-        // Clear input
-        messageInput.value = '';
-
-        // Scroll to bottom
-        scrollToBottom();
-
-        $.ajax({
-            url: "/send_response_to_frontend/",
-            type: "POST",
-            processData: false,
-            contentType: false,
-            data: formData,
+        const responseValue = await fetch("/send_response_to_frontend/", {
+            method: "POST",
             headers: {
-                'X-CSRFToken': getCookie('csrftoken')
-            }
-        }).done(function (response) {
-            addBotResponse(messagesArea, response['message']);
+                "Content-Type": "application/json",
+                "X-CSRFToken": csrfToken,
+            },
+            body: JSON.stringify({text: message})
         });
 
+        const dataToBackend = await responseValue.json();
+
+        if (responseValue.ok) {
+            // Add user message
+            const userMessage = createMessageElement(message, 'user');
+            messagesArea.appendChild(userMessage);
+
+            // Clear input
+            messageInput.value = '';
+
+            // Scroll to bottom
+            scrollToBottom();
+            addBotResponse(messagesArea, dataToBackend['bot_answer'])
+        }
     }
 
     messageForm.addEventListener('submit', handleMessageSubmit);
