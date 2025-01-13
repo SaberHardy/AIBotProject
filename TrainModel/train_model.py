@@ -75,25 +75,25 @@ class SimpleChatBotModel:
 
         self.model.save(f'{model_dir}/chatbot_model.h5')
 
-        with open(f'{model_dir}/tokenizer.pickle', 'wb') as file_token:
+        with open(f'TrainModel/{model_dir}/tokenizer.pickle', 'wb') as file_token:
             pickle.dump(self.tokenizer, file_token, protocol=pickle.HIGHEST_PROTOCOL)
 
-        with open(f'{model_dir}/label_tokenizer.pickle', 'wb') as file_token:
+        with open(f'TrainModel/{model_dir}/label_tokenizer.pickle', 'wb') as file_token:
             pickle.dump(self.label_tokenizer, file_token, protocol=pickle.HIGHEST_PROTOCOL)
 
-        with open(f'{model_dir}/responses.json', 'w') as responses:
+        with open(f'TrainModel/{model_dir}/responses.json', 'w') as responses:
             json.dump(self.responses, responses)
 
     def load_model(self, model_dir="chatbot_model"):
-        self.model = tf.keras.models.load_model(f"{model_dir}/model.h5")
+        self.model = tf.keras.models.load_model(f"TrainModel/{model_dir}/chatbot_model.h5")
 
-        with open(f'{model_dir}/tokenizer.pickle', 'rb') as file_token:
+        with open(f'TrainModel/{model_dir}/tokenizer.pickle', 'rb') as file_token:
             self.tokenizer = pickle.load(file_token)
 
-        with open(f'{model_dir}/label_tokenizer.pickle', 'rb') as file_token:
+        with open(f'TrainModel/{model_dir}/label_tokenizer.pickle', 'rb') as file_token:
             self.label_tokenizer = pickle.load(file_token)
 
-        with open(f'{model_dir}/responses.json', 'r') as responses:
+        with open(f'TrainModel/{model_dir}/responses.json', 'r') as responses:
             self.responses = json.load(responses)
 
         self.total_words = len(self.tokenizer.word_index) + 1
